@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "preparation-chemistry-exam"
+version = "0.0.1"
+description = "Service for chemistry exam preparation"
+authors = ["Evgeny Kondakov <Cond.Evgeny@ya.ru>", "Artem Ryzhenkov <RyzhenkovArt@ya.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^5.1.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
