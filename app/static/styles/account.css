@@ -1,13 +1,15 @@
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f9f9f9;
+    background-color: #1c1c1c; /* Темный фон */
+    color: #d1c4e9; /* Светло-фиолетовый текст */
     margin: 0;
     padding: 0;
     text-align: center;
 }
 
 header {
-    background-color: #7F3DFF;
+    background-color: #6A0DAD; /* Глубокий фиолетовый */
+    padding: 20px;
 }
 
 .navbar {
@@ -15,19 +17,32 @@ header {
     justify-content: center;
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 .navbar li {
-    margin: 0 10px;
+    margin: 0 15px;
 }
 
 .navbar a {
     text-decoration: none;
-    color: #fff;
-    font-size: 16px;
+    color: #EDE7F6; /* Светлый фиолетовый */
+    font-size: 18px;
     font-weight: bold;
+    transition: color 0.3s ease;
 }
 
 .navbar a:hover {
+    color: #7C4DFF; /* Ярко-фиолетовый при наведении */
     text-decoration: underline;
 }
+
+footer {
+    background-color: #1c1c1c; /* Темный фон для футера */
+    color: #d1c4e9; /* Светло-фиолетовый текст */
+    padding: 10px 0;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
