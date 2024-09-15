@@ -9,7 +9,7 @@ class MainPageView(ViewBase):
 
     @staticmethod
     def get(request):
-        return render(request, 'main_page.html')
+        return render(request, 'main_page/main_page.html')
 
 
 class UserRegistrationPageView(ViewBase):
@@ -19,7 +19,7 @@ class UserRegistrationPageView(ViewBase):
     @staticmethod
     def get(request):
         form = UserRegistrationForm()
-        return render(request, 'register_user.html', {'form': form})
+        return render(request, 'account/register_user.html', {'form': form})
 
     @staticmethod
     def post(request):
@@ -27,7 +27,7 @@ class UserRegistrationPageView(ViewBase):
         if form.is_valid():
             form.save()
             return redirect('/admin/')
-        return render(request, 'register_user.html', {'form': form})
+        return render(request, 'account/register_user.html', {'form': form})
 
 
 class TrainVariationsPageView(ViewBase):
@@ -35,7 +35,7 @@ class TrainVariationsPageView(ViewBase):
 
     @staticmethod
     def get(request):
-        return render(request, 'train_variations.html')
+        return render(request, 'train_variations/train_variations.html')
 
 
 class MaterialsPageView(ViewBase):
@@ -43,7 +43,7 @@ class MaterialsPageView(ViewBase):
 
     @staticmethod
     def get(request):
-        return render(request, 'materials.html')
+        return render(request, 'materials/materials.html')
 
 
 class SearchPageView(ViewBase):
@@ -51,7 +51,7 @@ class SearchPageView(ViewBase):
 
     @staticmethod
     def get(request):
-        return render(request, 'search.html')
+        return render(request, 'search/search.html')
 
 
 class ForumPageView(ViewBase):
@@ -59,7 +59,7 @@ class ForumPageView(ViewBase):
 
     @staticmethod
     def get(request):
-        return render(request, 'forum.html')
+        return render(request, 'forum/forum.html')
 
 
 class AccountPageView(ViewBase):
@@ -67,4 +67,4 @@ class AccountPageView(ViewBase):
 
     @staticmethod
     def get(request):
-        return render(request, 'account.html')
+        return render(request, 'account/account.html')

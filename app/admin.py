@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+
+class AdminModel(admin.ModelAdmin):
+    class Media:
+        css = {
+            'all': '/static/styles/admin.css'
+        }
