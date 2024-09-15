@@ -19,21 +19,21 @@ from django.urls import path
 
 from app.views import (
     MainPageView,
-    UserRegistrationView,
-    TrainVariationsView,
-    MaterialsView,
-    SearchView,
-    ForumView,
-    AccountView,
+    UserRegistrationPageView,
+    TrainVariationsPageView,
+    MaterialsPageView,
+    SearchPageView,
+    ForumPageView,
+    AccountPageView,
 )
 
 urlpatterns = [
     path('', MainPageView.as_view(), name='main_page'),
     path('admin/', admin.site.urls),
-    path('register/', UserRegistrationView.as_view(), name='register_user'),
-    path('train_variations/', TrainVariationsView.as_view(), name='train_variations'),
-    path('materials/', MaterialsView.as_view(), name='materials'),
-    path('search/', SearchView.as_view(), name='search'),
-    path('forum/', ForumView.as_view(), name='forum'),
-    path('account/', AccountView.as_view(), name='account'),
+    path('register/', UserRegistrationPageView.as_view(), name='register_user'),
+    path('train_variations/', TrainVariationsPageView.as_view(), name='train_variations'),
+    path('materials/', MaterialsPageView.as_view(), name='materials'),
+    path('search/', SearchPageView.as_view(), name='search'),
+    path('forum/', ForumPageView.as_view(), name='forum'),
+    path('account/', AccountPageView.as_view(), name='account'),
 ]

@@ -12,7 +12,7 @@ class MainPageView(ViewBase):
         return render(request, 'main_page.html')
 
 
-class UserRegistrationView(ViewBase):
+class UserRegistrationPageView(ViewBase):
     PROHIBITED_METHODS: tuple = ('put', 'patch', 'delete')
     INVALID_FORM_ERROR: str = 'Invalid form data provided'
 
@@ -30,7 +30,7 @@ class UserRegistrationView(ViewBase):
         return render(request, 'register_user.html', {'form': form})
 
 
-class TrainVariationsView(ViewBase):
+class TrainVariationsPageView(ViewBase):
     PROHIBITED_METHODS: tuple = ('put', 'post', 'patch', 'delete')
 
     @staticmethod
@@ -38,7 +38,7 @@ class TrainVariationsView(ViewBase):
         return render(request, 'train_variations.html')
 
 
-class MaterialsView(ViewBase):
+class MaterialsPageView(ViewBase):
     PROHIBITED_METHODS: tuple = ('put', 'post', 'patch', 'delete')
 
     @staticmethod
@@ -46,7 +46,7 @@ class MaterialsView(ViewBase):
         return render(request, 'materials.html')
 
 
-class SearchView(ViewBase):
+class SearchPageView(ViewBase):
     PROHIBITED_METHODS: tuple = ('put', 'post', 'patch', 'delete')
 
     @staticmethod
@@ -54,7 +54,7 @@ class SearchView(ViewBase):
         return render(request, 'search.html')
 
 
-class ForumView(ViewBase):
+class ForumPageView(ViewBase):
     PROHIBITED_METHODS: tuple = ('put', 'post', 'patch', 'delete')
 
     @staticmethod
@@ -62,7 +62,7 @@ class ForumView(ViewBase):
         return render(request, 'forum.html')
 
 
-class AccountView(ViewBase):
+class AccountPageView(ViewBase):
     PROHIBITED_METHODS: tuple = ('put', 'post', 'patch', 'delete')
 
     @staticmethod
