@@ -1,16 +1,15 @@
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #121212; /* Темный черный фон */
-    color: #e0e0e0; /* Светло-серый текст */
+    background-color: #121212; /* Очень темный фон */
+    color: #EDE7F6; /* Светло-фиолетовый текст */
     margin: 0;
     padding: 0;
     text-align: center;
 }
 
 header {
-    background-color: #3b0a45; /* Глубокий фиолетовый */
-    color: #ffffff; /* Белый текст */
-    padding: 20px 0;
+    background-color: #3F1D7B; /* Глубокий фиолетовый */
+    padding: 20px;
 }
 
 .navbar {
@@ -27,13 +26,34 @@ header {
 
 .navbar a {
     text-decoration: none;
-    color: #e0e0e0; /* Светло-серый текст для ссылок */
-    font-size: 16px;
+    color: #EDE7F6; /* Светлый фиолетовый */
+    font-size: 18px;
     font-weight: bold;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
 .navbar a:hover {
-    color: #d1a5e0; /* Светло-фиолетовый при наведении */
+    color: #B39DDB; /* Немного более светлый фиолетовый */
     text-decoration: underline;
+}
+
+button {
+    background-color: #6A0DAD; /* Глубокий фиолетовый */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #7C4DFF; /* Ярко-фиолетовый */
+    transform: scale(1.05);
+}
+
+button:focus {
+    outline: none;
 }
