@@ -1,45 +1,57 @@
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #121212; /* Очень темный фон */
-    color: #EDE7F6; /* Светло-фиолетовый текст */
+    background-color: #1a1a1a;
+    color: #ffffff;
     margin: 0;
     padding: 0;
     text-align: center;
 }
 
 header {
-    background-color: #3F1D7B; /* Глубокий фиолетовый */
+    background-color: #3F1D7B;
+    color: #ffffff;
     padding: 20px;
 }
 
-.navbar {
+.container {
     display: flex;
-    justify-content: center;
-    list-style-type: none;
-    padding: 0;
+    max-width: none;
     margin: 0;
 }
 
-.navbar li {
-    margin: 0 15px;
+.news-section {
+    width: 25%;
+    background-color: #222;
+    color: #ffffff;
+    padding: 20px;
+    overflow-y: auto;
+    box-sizing: border-box;
 }
 
-.navbar a {
-    text-decoration: none;
-    color: #EDE7F6; /* Светлый фиолетовый */
-    font-size: 18px;
-    font-weight: bold;
-    transition: color 0.3s ease, text-decoration 0.3s ease;
+.news {
+    background-color: #333;
+    color: #ffffff;
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
-.navbar a:hover {
-    color: #B39DDB; /* Немного более светлый фиолетовый */
-    text-decoration: underline;
+.main-content {
+    flex: 1;  /* Основной блок растягивается на всю доступную ширину */
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main-block {
+    flex: 1;
+    background-color: #444;
+    padding: 20px;
+    border-radius: 8px;
+    color: #ffffff;
 }
 
 button {
-    background-color: #6A0DAD; /* Глубокий фиолетовый */
-    color: #fff;
+    background-color: #6A0DAD;
+    color: #ffffff;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
@@ -50,10 +62,33 @@ button {
 }
 
 button:hover {
-    background-color: #7C4DFF; /* Ярко-фиолетовый */
+    background-color: #7C4DFF;
     transform: scale(1.05);
 }
 
-button:focus {
-    outline: none;
+.useful-articles {
+    width: 100%;
+    padding: 20px;
+    background-color: #555;
+    border-radius: 8px;
+    color: #ffffff;
+}
+
+.useful-articles h3 {
+    color: #ffffff;
+}
+
+.article {
+    width: calc(33.33% - 20px);
+    display: inline-block;
+    background-color: #666;
+    color: #ffffff;
+    padding: 10px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.article:last-child {
+    margin-right: 0;
 }

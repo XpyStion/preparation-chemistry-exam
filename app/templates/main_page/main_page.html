@@ -1,19 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        {% load static %}
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Главная</title>
-        <link rel="stylesheet" type="text/css" href="{% static 'styles/main_page.css' %}">
-    </head>
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/main_page.css' %}">
+</head>
 
-    <body>
-        <header>
-            {% include 'navbar.html' %}
-        </header>
-    </body>
+<body>
+    <header>
+        {% include 'navbar.html' %}
+    </header>
 
+    <div class="container">
+        <div class="news-section">
+            <div class="news">Новость 1</div>
+            <div class="news">Новость 2</div>
+            <div class="news">Новость 3</div>
+        </div>
+
+        <div class="main-content">
+            <div class="main-block">
+                <p>Описание функционала сайта...</p>
+                <button>Создать</button>
+            </div>
+            <div class="useful-articles">
+                <h3>Полезные статьи</h3>
+                <div class="article">Статья 1</div>
+                <div class="article">Статья 2</div>
+                <div class="article">Статья 3</div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
