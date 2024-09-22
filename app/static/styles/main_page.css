@@ -103,6 +103,23 @@ button:hover {
 .navbar {
     display: flex;
     justify-content: center;
+    align-items: center;
+    background-color: #3F1D7B;
+    padding: 10px 0;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navbar img.logo {
+    height: 50px; /* Adjust height as needed */
+    margin-right: 15px; /* Add some spacing between logo and links */
+}
+
+.navbar ul {
+    display: flex;
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -114,13 +131,25 @@ button:hover {
 
 .navbar a {
     text-decoration: none;
-    color: #EDE7F6; /* Светлый фиолетовый */
-    font-size: 18px;
+    color: #EDE7F6;
+    font-size: 16px;
     font-weight: bold;
     transition: color 0.3s ease;
 }
 
 .navbar a:hover {
-    color: #7C4DFF; /* Ярко-фиолетовый при наведении */
-    text-decoration: underline;
+    color: #7C4DFF;
+    text-decoration: none;
+}
+
+.logo-link {
+    text-decoration: none;
+    text-align: left;
+    height: 70px;
+    width: 70px;
+}
+
+.logo {
+    height: 10px; /* Adjust height as needed */
+    text-decoration: none;
 }
