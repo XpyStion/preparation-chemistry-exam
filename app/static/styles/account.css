@@ -162,23 +162,22 @@ button:hover {
 }
 
 .avatar img {
-    width: 100px; /* Размеры аватара */
-    border-radius: 50%; /* Круглый аватар */
+    width: 100px;
+    border-radius: 50%;
 }
 
 .user-details {
-    text-align: left; /* Выравнивание текста слева */
-    color: #ffffff; /* Белый текст */
+    text-align: left;
+    color: #ffffff;
 }
 
 .user-info p {
-    margin: 5px 0; /* Отступы для информации о пользователе */
+    margin: 5px 0;
 }
 
-/* Медиазапрос для адаптивного дизайна */
 @media (max-width: 768px) {
     .user-profile {
-        flex-direction: column; /* Отображение блока вертикально на мобильных устройствах */
+        flex-direction: column;
         align-items: center;
     }
 
