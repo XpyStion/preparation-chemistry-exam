@@ -1,7 +1,8 @@
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 
 from app.base.views_base import ViewBase
-from app.forms import UserRegistrationForm
+from app.forms import UserRegistrationForm, LoginForm
 
 
 class MainPageView(ViewBase):
@@ -26,7 +27,7 @@ class UserRegistrationPageView(ViewBase):
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/admin/')
+            return redirect('/login/')
         return render(request, 'account/register_user.html', {'form': form})
 
 
@@ -63,7 +64,7 @@ class ForumPageView(ViewBase):
 
 
 class AccountPageView(ViewBase):
-    PROHIBITED_METHODS: tuple = ('put', 'post', 'patch', 'delete')
+    PROHIBITED_METHODS: tuple = ('put', 'patch', 'delete')
 
     @staticmethod
     def get(request):
@@ -71,8 +72,21 @@ class AccountPageView(ViewBase):
 
 
 class LoginPageView(ViewBase):
-    PROHIBITED_METHODS: tuple = ('put', 'post', 'patch', 'delete')
+    PROHIBITED_METHODS: tuple = ('put', 'patch', 'delete')
 
     @staticmethod
     def get(request):
         return render(request, 'account/login.html')
+
+    @staticmethod
+    def post(request):
+        form = LoginForm(request, request.POST)
+        if not form.is_valid():
+            return render(request, 'account/login.html')
+
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('/account/')

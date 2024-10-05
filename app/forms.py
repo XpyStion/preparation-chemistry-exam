@@ -1,6 +1,8 @@
 from enum import Enum
 
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
+
 from .models import AuthUser
 
 
@@ -43,3 +45,7 @@ class UserRegistrationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class LoginForm(AuthenticationForm):
+    pass
