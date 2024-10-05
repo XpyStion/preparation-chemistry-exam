@@ -1,19 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        {% load static %}
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Личный кабинет</title>
-        <link rel="stylesheet" type="text/css" href="{% static 'styles/main_page.css' %}">
-    </head>
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/account.css' %}">
+</head>
 
-    <body>
-        <header>
-            {% include 'navbar.html' %}
-        </header>
-    </body>
+<body>
+    <header>
+        {% include 'navbar.html' %}
+    </header>
+
+    <div class="user-profile">
+        <div class="avatar">
+            <img src="{% static 'images/avatar.jpg' %}" alt="Avatar">
+        </div>
+        <div class="user-details">
+            <p>Роль: Студент</p>
+            <p>ФИО: Иванов Иван Иванович</p>
+            <div class="user-info">
+                <p>Страна: Россия</p>
+                <p>Почта: example@example.com</p>
+                <p>Телефон: +7 123 456 7890</p>
+            </div>
+        </div>
+    </div>
+</body>
 
 </html>
