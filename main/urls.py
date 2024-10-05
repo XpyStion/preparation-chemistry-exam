@@ -25,6 +25,7 @@ from app.views import (
     SearchPageView,
     ForumPageView,
     AccountPageView,
+    LoginPageView,
 )
 
 urlpatterns = [
@@ -36,4 +37,5 @@ urlpatterns = [
     path('search/', SearchPageView.as_view(), name='search'),
     path('forum/', ForumPageView.as_view(), name='forum'),
     path('account/', AccountPageView.as_view(), name='account'),
+    path('login/', LoginPageView.as_view(), name='account'),
 ]

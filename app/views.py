@@ -68,3 +68,11 @@ class AccountPageView(ViewBase):
     @staticmethod
     def get(request):
         return render(request, 'account/account.html')
+
+
+class LoginPageView(ViewBase):
+    PROHIBITED_METHODS: tuple = ('put', 'post', 'patch', 'delete')
+
+    @staticmethod
+    def get(request):
+        return render(request, 'account/login.html')

@@ -1,0 +1,210 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    min-height: 100vh; /* Ensure full height */
+}
+
+header {
+    background-color: #3F1D7B;
+    color: #ffffff;
+    padding: 20px;
+    width: 100%; /* Stretch header to 100% width */
+}
+
+.container {
+    display: flex;
+    flex: 1;
+    max-width: 100%; /* Stretch container to 100% width */
+    margin: 0 auto;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%; /* Stretch main content to 100% width */
+}
+
+.news-section {
+    width: 25%;
+    background-color: #222;
+    color: #ffffff;
+    padding: 20px;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.news {
+    background-color: #333;
+    color: #ffffff;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.main-block {
+    flex: 1;
+    background-color: #444;
+    padding: 20px;
+    border-radius: 8px;
+    color: #ffffff;
+}
+
+button {
+    background-color: #6A0DAD;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #7C4DFF;
+    transform: scale(1.05);
+}
+
+.useful-articles {
+    width: 100%;
+    padding: 20px;
+    background-color: #555;
+    border-radius: 8px;
+    color: #ffffff;
+}
+
+.useful-articles h3 {
+    color: #ffffff;
+}
+
+.article {
+    width: calc(33.33% - 20px);
+    display: inline-block;
+    background-color: #666;
+    color: #ffffff;
+    padding: 10px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.article:nth-child(3n) {
+    margin-right: 0;
+}
+
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3F1D7B;
+    padding: 10px 0;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navbar img.logo {
+    height: 50px; /* Adjust height as needed */
+    margin-right: 15px; /* Add some spacing between logo and links */
+}
+
+.navbar ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar li {
+    margin: 0 15px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #EDE7F6;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: #7C4DFF;
+    text-decoration: none;
+}
+
+.logo-link {
+    text-decoration: none;
+    text-align: left;
+    height: 70px;
+    width: 70px;
+}
+
+.logo {
+    height: 10px; /* Adjust height as needed */
+    text-decoration: none;
+}
+
+.login-form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 8px;
+    color: #ffffff;
+}
+
+label {
+    color: #ffffff;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="submit"],
+.register-link a {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+    background-color: #444;
+    color: #ffffff;
+}
+
+input[type="submit"] {
+    background-color: #6A0DAD;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #7C4DFF;
+}
+
+.register-link {
+    text-align: center;
+}
+
+.register-link a {
+    color: #7C4DFF;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.register-link a:hover {
+    color: #ffffff;
+}
