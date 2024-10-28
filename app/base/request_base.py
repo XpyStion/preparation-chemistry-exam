@@ -34,7 +34,7 @@ class RequestBase(object):
     def get(self, endpoint: str, headers: AbstractHeaders = None, params: AbstractParams = None, **kwargs) -> Response:
         return self._make_request(method='GET', endpoint=endpoint, headers=headers, params=params, **kwargs)
 
-    def post(self, endpoint: str, data: AbstractRequestData,
+    def post(self, endpoint: str, data: AbstractRequestData | None = None,
              headers: AbstractHeaders = None, params: AbstractParams = None, **kwargs
              ) -> Response:
         return self._make_request(method='POST', endpoint=endpoint, headers=headers, params=params, data=data, **kwargs)
