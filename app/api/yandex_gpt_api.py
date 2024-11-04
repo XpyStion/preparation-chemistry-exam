@@ -1,13 +1,11 @@
-from os import getenv
-
-from app.api.models.yandex_gpt_api_models import PostIamTokenModel, PostFoundationModelsV1CompletionModel, MainModel
+from app.api.models.yandex_gpt_api_models import PostIamTokenModel, PostFoundationModelsV1CompletionModel
 from app.base.request_base import RequestBase, AbstractParams, AbstractHeaders
 from app.constants import YANDEX_AUTH_URL, YANDEX_CLOUD_URL, YandexGPTModel
 
 
 class YandexGPTAuthApi(RequestBase):
 
-    def __init__(self, base_url: str = YANDEX_AUTH_URL, token: str | None = getenv('OAUTH-TOKEN')):
+    def __init__(self, token: str | None, base_url: str = YANDEX_AUTH_URL):
         super().__init__(base_url)
         if not token:
             raise Exception
@@ -24,9 +22,9 @@ class YandexGPTApi(RequestBase):
 
     def __init__(
             self,
+            token: str | None,
+            folder_id: str | None,
             base_url: str = YANDEX_CLOUD_URL,
-            token: str | None = getenv('IAM-TOKEN'),
-            folder_id: str | None = getenv('FOLDER_ID')
     ):
         super().__init__(base_url)
         if not token or not folder_id:
