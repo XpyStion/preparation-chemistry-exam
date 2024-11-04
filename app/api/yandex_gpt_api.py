@@ -1,20 +1,68 @@
 from os import getenv
 
-from app.base.request_base import RequestBase, AbstractParams
-from app.constants import YANDEX_GPT_URL
+from app.api.models.yandex_gpt_api_models import PostIamTokenModel, PostFoundationModelsV1CompletionModel, MainModel
+from app.base.request_base import RequestBase, AbstractParams, AbstractHeaders
+from app.constants import YANDEX_AUTH_URL, YANDEX_CLOUD_URL, YandexGPTModel
 
 
-class YandexGPTApi(RequestBase):
+class YandexGPTAuthApi(RequestBase):
 
-    def __init__(self, base_url: str = YANDEX_GPT_URL, token: str | None = getenv('API_KEY')):
+    def __init__(self, base_url: str = YANDEX_AUTH_URL, token: str | None = getenv('OAUTH-TOKEN')):
         super().__init__(base_url)
         if not token:
             raise Exception
 
         self.token = token
-        self.api_uri = ''
 
-    def post_iam_token(self) -> dict[str, str]:
+    def post_iam_token(self) -> PostIamTokenModel:
         params: AbstractParams = {'yandexPassportOauthToken': self.token}
         response = self.post(endpoint='iam/v1/tokens', params=params)
-        return response.json()
+        return PostIamTokenModel(**response.json())
+
+
+class YandexGPTApi(RequestBase):
+
+    def __init__(
+            self,
+            base_url: str = YANDEX_CLOUD_URL,
+            token: str | None = getenv('IAM-TOKEN'),
+            folder_id: str | None = getenv('FOLDER_ID')
+    ):
+        super().__init__(base_url)
+        if not token or not folder_id:
+            raise Exception
+
+        self.token = token
+        self.folder_id = folder_id
+
+    @property
+    def headers(self) -> AbstractHeaders:
+        return {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {self.token}",
+            "x-folder-id": self.folder_id
+
+        }
+
+    def post_foundation_models_v1_completion(
+            self,
+            text: str,
+            role: str = "user",
+            gpt_type: str = YandexGPTModel.YANDEXGPT_LITE,
+            temperature: float = 0.3,
+            max_tokens: int = 50
+    ):
+        data = {
+            "modelUri": f"gpt://{self.folder_id}/{gpt_type}/rc",
+            "completionOptions": {
+                "stream": False,
+                "temperature": temperature,
+                "maxTokens": max_tokens
+            },
+            "messages": [{
+                "role": role,
+                "text": text
+            }]
+        }
+        response = self.post(endpoint='foundationModels/v1/completion', data=data, headers=self.headers)
+        return PostFoundationModelsV1CompletionModel(**response.json())

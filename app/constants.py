@@ -1,6 +1,7 @@
 from enum import Enum
 
-YANDEX_GPT_URL: str = 'https://iam.api.cloud.yandex.net'
+YANDEX_AUTH_URL: str = 'https://iam.api.cloud.yandex.net'
+YANDEX_CLOUD_URL: str = 'https://llm.api.cloud.yandex.net'
 
 
 class YandexGPTModel(str, Enum):
