@@ -1,8 +1,10 @@
 from django.contrib.auth import authenticate, login
+from django.http import HttpResponseForbidden, HttpResponse
 from django.shortcuts import render, redirect
 
 from app.base.views_base import ViewBase
 from app.forms import UserRegistrationForm, LoginForm
+from app.models import Roles
 
 
 class MainPageView(ViewBase):
@@ -60,7 +62,7 @@ class ForumPageView(ViewBase):
 
     @staticmethod
     def get(request):
-        return render(request, 'forum/forum.html')
+        return render(request, 'forum/create_task.html')
 
 
 class AccountPageView(ViewBase):
@@ -92,3 +94,31 @@ class LoginPageView(ViewBase):
         if user is not None:
             login(request, user)
             return redirect('/account/')
+
+
+class CreateTaskView(ViewBase):
+    PROHIBITED_METHODS: tuple = ('put', 'patch', 'delete')
+
+    @staticmethod
+    def get(request):
+        if not request.user.is_authenticated:
+            return redirect('/login/')
+
+        if request.user.role not in (Roles.ADMIN, Roles.TEACHER):
+            return HttpResponseForbidden()
+
+        return render(request, 'create_task/create_task.html')
+
+    @staticmethod
+    def post(request):
+        if not request.user.is_authenticated:
+            return redirect('/login/')
+
+        if request.user.role not in (Roles.ADMIN, Roles.TEACHER):
+            return HttpResponseForbidden()
+
+        text_to_insert = 'TEST TEST TEST'
+        context = {
+            'task_text': text_to_insert,
+        }
+        return render(request, 'create_task/create_task.html', context)
