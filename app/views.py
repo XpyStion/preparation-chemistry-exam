@@ -1,4 +1,5 @@
 from os import getenv
+import random
 
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseForbidden
@@ -120,14 +121,19 @@ class CreateTaskView(ViewBase):
         if request.user.role not in (Roles.ADMIN, Roles.TEACHER):
             return HttpResponseForbidden()
 
-        prompt = '''
+        elements: dict = {
+            1:'Be', 2:'F', 3:'Mg', 4:'Cl', 5:'O', 6:'Li', 7:'N', 8:'Al', 9:'S', 10:'Na'
+        }
+        elements = random.sample(list(elements.values()), k=5)
+
+        prompt = f'''
 Дана формулировка задания:
 "Для выполнения заданий 1−3 используйте следующий ряд химических элементов:
-1. Be
+1. {elements[0]}
 2. F
 3. Mg
-4. Cl
-5. O
+4. {elements[1]}
+5. {elements[2]}
 Ответом в заданиях 1−3 является последовательность цифр, под которыми указаны химические элементы в данном ряду.
 Определите, какие из указанных элементов образуют положительный или отрицательный ион с электронной конфигурацией неона. Запишите в поле ответа номера выбранных элементов в порядке возрастания."
 
