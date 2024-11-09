@@ -1,0 +1,39 @@
+.create-task-content {
+    width: 80%;
+    height: 80vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.select-task {
+    margin: 2% 0 1%;
+}
+
+.dropbox-textfield-group {
+
+}
+
+#task-dropbox {
+    color: white;
+    background-color: #3F1D7B;
+    padding: 5px 10px;
+}
+
+
+#task-dropbox,
+#task-clear-button,
+#task-generate-button,
+#task-add-button {
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+
+.tasks-textarea {
+    width: 100%;
+    border-radius: 5px;
+    resize: none;
+    text-align: center;
+}

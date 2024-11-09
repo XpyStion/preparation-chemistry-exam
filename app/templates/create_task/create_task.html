@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Создать задание</title>
     <link rel="stylesheet" type="text/css" href="{% static 'styles/common.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/create_task.css' %}">
 </head>
 
 <body>
@@ -16,6 +17,7 @@
     </header>
 
     <div class="create-task-content">
+
         <label class="select-task">
             <select id="task-dropbox">
                 <option value="task1">Задание 1</option>
@@ -24,13 +26,15 @@
             </select>
         </label>
 
-        <label class="input-text-field">
-            <textarea id="taks-textarea" rows="8" cols="100">{{ task_text }}</textarea>
-        </label>
+        <div class="dropbox-textfield-group">
+            <label class="input-text-field">
+                <textarea id="tasks-textarea" rows="8" cols="100">{{ task_text }}</textarea>
+            </label>
 
-        <label class="clear-button">
-            <button id="task-clear-button">Очистить</button>
-        </label>
+            <label class="clear-button">
+                <button id="task-clear-button">Очистить</button>
+            </label>
+        </div>
 
         <label class="generate-button">
             <form id="task-generate-form" action="/create_task/" method="post">
@@ -45,8 +49,8 @@
 
 </body>
 <script>
-    document.getElementById('clear-button').addEventListener('click', function() {
-        document.getElementById('large-text-field').value = ''; // Очистить текстовое поле
+    document.getElementById('task-clear-button').addEventListener('click', function() {
+        document.getElementById('tasks-textarea').value = ''; // Очистить текстовое поле
     });
 </script>
 </html>
