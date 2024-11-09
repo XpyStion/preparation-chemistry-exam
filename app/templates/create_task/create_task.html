@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Форум</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/main_page.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/common.css' %}">
 </head>
 
 <body>
@@ -24,11 +24,11 @@
 
         <textarea id="large-text-field" rows="6" cols="50">{{ task_text }}</textarea>
 
-        <button id="clear-button">Стереть</button>
+        <button id="clear-button">Очистить</button>
         <form id="generate" action="/create_task/" method="post">
             <button id="generate-button">Сгенерировать</button>
         </form>
-        <button id="send-button">Отправить</button>
+        <button id="send-button">Добавить</button>
     </div>
 </body>
 <script>

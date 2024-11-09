@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/common.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/main_page.css' %}">
 </head>
 
@@ -24,8 +25,8 @@
 
         <div class="main-content">
             <div class="main-block">
-                <p>Описание функционала сайта...</p>
-                <button>Создать</button>
+                <p>Создать задание</p>
+                <a href="{% url 'create_task' %}">Создать</a>
             </div>
             <div class="useful-articles">
                 <h3>Полезные статьи</h3>

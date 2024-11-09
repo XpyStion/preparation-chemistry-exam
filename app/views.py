@@ -62,7 +62,7 @@ class ForumPageView(ViewBase):
 
     @staticmethod
     def get(request):
-        return render(request, 'forum/create_task.html')
+        return render(request, 'forum/forum.html')
 
 
 class AccountPageView(ViewBase):
