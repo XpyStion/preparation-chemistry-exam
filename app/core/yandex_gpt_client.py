@@ -7,7 +7,7 @@ from app.api.yandex_gpt_api import YandexGPTAuthApi, YandexGPTApi
 class GPTBase(ABC):
 
     @abstractmethod
-    def get_prompt_response(self, **kwargs):
+    def get_prompt_response_msg(self, **kwargs):
         pass
 
 
@@ -31,9 +31,9 @@ class YandexGPTClient(GPTBase):
             self._iam_token = YandexGPTAuthApi(token=self.token).post_iam_token().iamToken
         return self._iam_token
 
-    def get_prompt_response(self, text: str, **kwargs) -> str:
+    def get_prompt_response_msg(self, text: str, **kwargs) -> str:
         return YandexGPTApi(
-            token=self._iam_token, folder_id=self.folder_id
+            token=self.iam_token, folder_id=self.folder_id
         ).post_foundation_models_v1_completion(
             text=text, **kwargs
         ).result.alternatives[0].message.text

@@ -48,7 +48,7 @@ class YandexGPTApi(RequestBase):
             role: str = "user",
             gpt_type: str = YandexGPTModel.YANDEXGPT_LITE,
             temperature: float = 0.3,
-            max_tokens: int = 50
+            max_tokens: int = 100
     ) -> PostFoundationModelsV1CompletionModel:
         data = {
             "modelUri": f"gpt://{self.folder_id}/{gpt_type}/rc",
