@@ -22,23 +22,23 @@ header {
     margin-right: auto;
 }
 
-.navbar {
+.navbar-content {
     display: flex;
     align-items: center;
 }
 
-.navbar ul {
+.navbar-content ul {
     display: flex;
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-.navbar li {
+.navbar-content li {
     margin: 0 15px;
 }
 
-.navbar a {
+.navbar-content a {
     text-decoration: none;
     color: #EDE7F6;
     font-size: 16px;
@@ -46,10 +46,10 @@ header {
     transition: color 0.3s ease;
 }
 
-.navbar a:hover {
+.navbar-content a:hover {
     color: #7C4DFF;
 }
 
-.navbar a:last-child {
+.navbar-content a:last-child {
     margin-right: 0;
 }

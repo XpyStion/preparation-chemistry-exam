@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Форум</title>
+    <title>Создать задание</title>
     <link rel="stylesheet" type="text/css" href="{% static 'styles/common.css' %}">
 </head>
 
@@ -15,7 +15,7 @@
         {% include 'navbar.html' %}
     </header>
 
-    <div class="content">
+    <div class="create-task-content">
         <select id="dropdown">
             <option value="task1">Задание 1</option>
             <option value="task2">Задание 2</option>
@@ -30,6 +30,7 @@
         </form>
         <button id="send-button">Добавить</button>
     </div>
+
 </body>
 <script>
     document.getElementById('clear-button').addEventListener('click', function() {
