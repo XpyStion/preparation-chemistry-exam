@@ -16,19 +16,31 @@
     </header>
 
     <div class="create-task-content">
-        <select id="dropdown">
-            <option value="task1">Задание 1</option>
-            <option value="task2">Задание 2</option>
-            <option value="task3">Задание 3</option>
-        </select>
+        <label class="select-task">
+            <select id="task-dropbox">
+                <option value="task1">Задание 1</option>
+                <option value="task2">Задание 2</option>
+                <option value="task3">Задание 3</option>
+            </select>
+        </label>
 
-        <textarea id="large-text-field" rows="6" cols="50">{{ task_text }}</textarea>
+        <label class="input-text-field">
+            <textarea id="taks-textarea" rows="8" cols="100">{{ task_text }}</textarea>
+        </label>
 
-        <button id="clear-button">Очистить</button>
-        <form id="generate" action="/create_task/" method="post">
-            <button id="generate-button">Сгенерировать</button>
-        </form>
-        <button id="send-button">Добавить</button>
+        <label class="clear-button">
+            <button id="task-clear-button">Очистить</button>
+        </label>
+
+        <label class="generate-button">
+            <form id="task-generate-form" action="/create_task/" method="post">
+                <button id="task-generate-button">Сгенерировать</button>
+            </form>
+        </label>
+
+        <label class="add-button">
+            <button id="task-add-button">Добавить</button>
+        </label>
     </div>
 
 </body>
