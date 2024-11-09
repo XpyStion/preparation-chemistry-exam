@@ -18,39 +18,42 @@
 
     <div class="create-task-content">
 
-        <label class="select-task">
-            <select id="task-dropbox">
-                <option value="task1">Задание 1</option>
-                <option value="task2">Задание 2</option>
-                <option value="task3">Задание 3</option>
-            </select>
-        </label>
-
         <div class="dropbox-textfield-group">
+            <label class="select-task">
+                <select id="task-dropbox">
+                    <option value="task1">Задание 1</option>
+                    <option value="task2">Задание 2</option>
+                    <option value="task3">Задание 3</option>
+                </select>
+            </label>
+
             <label class="input-text-field">
                 <textarea id="tasks-textarea" rows="8" cols="100">{{ task_text }}</textarea>
             </label>
+        </div>
 
+        <div class="buttons-group">
             <label class="clear-button">
                 <button id="task-clear-button">Очистить</button>
             </label>
+
+            <label class="generate-button">
+                <form id="task-generate-form" action="/create_task/" method="post">
+                    <button id="task-generate-button">Сгенерировать</button>
+                </form>
+            </label>
+
+            <label class="add-button">
+                <button id="task-add-button">Добавить</button>
+            </label>
         </div>
 
-        <label class="generate-button">
-            <form id="task-generate-form" action="/create_task/" method="post">
-                <button id="task-generate-button">Сгенерировать</button>
-            </form>
-        </label>
-
-        <label class="add-button">
-            <button id="task-add-button">Добавить</button>
-        </label>
     </div>
 
 </body>
-<script>
-    document.getElementById('task-clear-button').addEventListener('click', function() {
-        document.getElementById('tasks-textarea').value = ''; // Очистить текстовое поле
-    });
-</script>
+    <script>
+        document.getElementById('task-clear-button').addEventListener('click', function() {
+            document.getElementById('tasks-textarea').value = ''; // Очистить текстовое поле
+        });
+    </script>
 </html>
