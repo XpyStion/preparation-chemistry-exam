@@ -6,6 +6,7 @@ from django.http import HttpResponseForbidden
 from django.shortcuts import render, redirect
 
 from app.base.views_base import ViewBase
+from app.core.prompt import Prompt
 from app.core.yandex_gpt_client import YandexGPTClient
 from app.forms import UserRegistrationForm, LoginForm
 from app.models import Roles
@@ -121,29 +122,13 @@ class CreateTaskView(ViewBase):
         if request.user.role not in (Roles.ADMIN, Roles.TEACHER):
             return HttpResponseForbidden()
 
-        elements: dict = {
-            1:'Be', 2:'F', 3:'Mg', 4:'Cl', 5:'O', 6:'Li', 7:'N', 8:'Al', 9:'S', 10:'Na'
-        }
-        elements = random.sample(list(elements.values()), k=5)
+        prompt = Prompt()
 
-        prompt = f'''
-Дана формулировка задания:
-"Для выполнения заданий 1−3 используйте следующий ряд химических элементов:
-1. {elements[0]}
-2. F
-3. Mg
-4. {elements[1]}
-5. {elements[2]}
-Ответом в заданиях 1−3 является последовательность цифр, под которыми указаны химические элементы в данном ряду.
-Определите, какие из указанных элементов образуют положительный или отрицательный ион с электронной конфигурацией неона. Запишите в поле ответа номера выбранных элементов в порядке возрастания."
-
-Напиши похожее задание за основу возьми шаблон формулировки
-'''
         task_text = YandexGPTClient(
             token=getenv('OAUTH_TOKEN'),
             folder_id=getenv('FOLDER_ID')
         ).get_prompt_response_msg(
-            text=prompt
+            text=prompt.get_task_1_prompt
         )
 
         context = {
