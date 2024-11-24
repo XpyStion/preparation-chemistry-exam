@@ -4,7 +4,7 @@ from app.base.util import StringEnum
 
 
 class PromptText(StringEnum):
-    TASK_1_PROMPT = '''
+    TASK_ONE_PROMPT = '''
 Дана формулировка задания:
 "Для выполнения заданий 1−3 используйте следующий ряд химических элементов:
 1. {element_1}
@@ -22,7 +22,7 @@ class PromptText(StringEnum):
 class Prompt:
 
     @property
-    def get_task_1_prompt(self):
+    def get_task_one_prompt(self):
         elements: dict = {
             1:'Be', 2:'F', 3:'Mg', 4:'Cl', 5:'O', 6:'Li', 7:'N', 8:'Al', 9:'S', 10:'Na'
         }
@@ -32,4 +32,4 @@ class Prompt:
             "element_2": random_elements[1],
             "element_3": random_elements[2],
         }
-        return PromptText.TASK_1_PROMPT.format(**data)
+        return PromptText.TASK_ONE_PROMPT.format(**data)

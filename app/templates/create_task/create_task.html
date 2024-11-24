@@ -21,14 +21,23 @@
         <div class="dropbox-textfield-group">
             <label class="select-task">
                 <select id="task-dropbox">
-                    <option value="task1">Задание 1</option>
-                    <option value="task2">Задание 2</option>
-                    <option value="task3">Задание 3</option>
+                    <option value="task-one">Задание 1</option>
+                    <option value="task-two">Задание 2</option>
+                    <option value="task-three">Задание 3</option>
+                    <option value="task-four">Задание 4</option>
+                    <option value="task-five">Задание 5</option>
+                    <option value="task-six">Задание 6</option>
+                    <option value="task-seven">Задание 7</option>
+                    <option value="task-eighth">Задание 8</option>
+                    <option value="task-nine">Задание 9</option>
+                    <option value="task-ten">Задание 10</option>
+                    <option value="task-eleven">Задание 11</option>
+                    <option value="task-twelve">Задание 12</option>
                 </select>
             </label>
 
             <label class="input-text-field">
-                <textarea id="tasks-textarea" rows="30" cols="100">{{ task_text }}</textarea>
+                <textarea id="tasks-textarea" rows="30" cols="100">{{ form.task_text }}</textarea>
             </label>
         </div>
 
@@ -39,6 +48,7 @@
 
             <label class="generate-button">
                 <form id="task-generate-form" action="/create_task/" method="post">
+                    <input type="hidden" id="selected-task" name="selected_task" value="">
                     <button id="task-generate-button">Сгенерировать</button>
                 </form>
             </label>
@@ -50,10 +60,20 @@
 
     </div>
 
-</body>
     <script>
         document.getElementById('task-clear-button').addEventListener('click', function() {
             document.getElementById('tasks-textarea').value = ''; // Очистить текстовое поле
         });
+
+        document.getElementById('task-generate-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Предотвращаем отправку формы по умолчанию
+
+            const selectedTask = document.getElementById('task-dropbox').value;
+            document.getElementById('selected-task').value = selectedTask;
+
+            this.submit(); // Отправляем форму
+        });
     </script>
+</body>
+
 </html>

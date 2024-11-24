@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from app.base.views_base import ViewBase
 from app.core.prompt import Prompt
 from app.core.yandex_gpt_client import YandexGPTClient
-from app.forms import UserRegistrationForm, LoginForm
+from app.forms import UserRegistrationForm, LoginForm, CreateTaskForm
 from app.models import Roles
 
 
@@ -122,16 +122,11 @@ class CreateTaskView(ViewBase):
         if request.user.role not in (Roles.ADMIN, Roles.TEACHER):
             return HttpResponseForbidden()
 
-        prompt = Prompt()
-
-        task_text = YandexGPTClient(
-            token=getenv('OAUTH_TOKEN'),
-            folder_id=getenv('FOLDER_ID')
-        ).get_prompt_response_msg(
-            text=prompt.get_task_1_prompt
-        )
+        form = CreateTaskForm(request.POST)
+        if not form.is_valid():
+            raise Exception
 
         context = {
-            'task_text': task_text,
+            'form': form.create_task_with_prompt(),
         }
         return render(request, 'create_task/create_task.html', context)

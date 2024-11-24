@@ -1,8 +1,11 @@
 from enum import Enum
+from os import getenv
 
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 
+from .core.prompt import Prompt
+from .core.yandex_gpt_client import YandexGPTClient
 from .models import AuthUser
 
 
@@ -49,3 +52,20 @@ class UserRegistrationForm(forms.ModelForm):
 
 class LoginForm(AuthenticationForm):
     pass
+
+
+class CreateTaskForm(forms.Form):
+    selected_task = forms.CharField(widget=forms.Textarea)
+
+    def create_task_with_prompt(self):
+        prompt = Prompt()
+        selected_task = self.cleaned_data.get('selected_task')
+        method = f"get_{selected_task.replace('-', '_')}_prompt"
+
+        task_text = YandexGPTClient(
+            token=getenv('OAUTH_TOKEN'),
+            folder_id=getenv('FOLDER_ID')
+        ).get_prompt_response_msg(
+            text=getattr(prompt, method)
+        )
+        return {'task_text': task_text}
