@@ -21,18 +21,18 @@
         <div class="dropbox-textfield-group">
             <label class="select-task">
                 <select id="task-dropbox">
-                    <option value="task-one">Задание 1</option>
-                    <option value="task-two">Задание 2</option>
-                    <option value="task-three">Задание 3</option>
-                    <option value="task-four">Задание 4</option>
-                    <option value="task-five">Задание 5</option>
-                    <option value="task-six">Задание 6</option>
-                    <option value="task-seven">Задание 7</option>
-                    <option value="task-eighth">Задание 8</option>
-                    <option value="task-nine">Задание 9</option>
-                    <option value="task-ten">Задание 10</option>
-                    <option value="task-eleven">Задание 11</option>
-                    <option value="task-twelve">Задание 12</option>
+                    <option value="task-one"{% if form.selected_task == 'task-one' %}selected{% endif %}>Задание 1</option>
+                    <option value="task-two"{% if form.selected_task == 'task-two' %}selected{% endif %}>Задание 2</option>
+                    <option value="task-three"{% if form.selected_task == 'task-three' %}selected{% endif %}>Задание 3</option>
+                    <option value="task-four"{% if form.selected_task == 'task-four' %}selected{% endif %}>Задание 4</option>
+                    <option value="task-five"{% if form.selected_task == 'task-five' %}selected{% endif %}>Задание 5</option>
+                    <option value="task-six"{% if form.selected_task == 'task-six' %}selected{% endif %}>Задание 6</option>
+                    <option value="task-seven"{% if form.selected_task == 'task-seven' %}selected{% endif %}>Задание 7</option>
+                    <option value="task-eighth"{% if form.selected_task == 'task-eighth' %}selected{% endif %}>Задание 8</option>
+                    <option value="task-nine"{% if form.selected_task == 'task-nine' %}selected{% endif %}>Задание 9</option>
+                    <option value="task-ten"{% if form.selected_task == 'task-ten' %}selected{% endif %}>Задание 10</option>
+                    <option value="task-eleven"{% if form.selected_task == 'task-eleven' %}selected{% endif %}>Задание 11</option>
+                    <option value="task-twelve"{% if form.selected_task == 'task-twelve' %}selected{% endif %}>Задание 12</option>
                 </select>
             </label>
 

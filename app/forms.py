@@ -68,4 +68,7 @@ class CreateTaskForm(forms.Form):
         ).get_prompt_response_msg(
             text=getattr(prompt, method)
         )
-        return {'task_text': task_text}
+        return {
+            'task_text': task_text,
+            'selected_task': selected_task
+        }
