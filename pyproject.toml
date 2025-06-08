@@ -1,18 +1,41 @@
 [tool.poetry]
-name = "preparation-chemistry-exam"
-version = "0.0.1"
-description = "Service for chemistry exam preparation"
-authors = ["Evgeny Kondakov <Cond.Evgeny@ya.ru>", "Artem Ryzhenkov <RyzhenkovArt@ya.ru>"]
+name = "chemistry"
+version = "1.0.0"
+description = "Chemistry education portal"
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.11"
-django = "^5.1.1"
-yandex_gpt = "^0.2.0"
-pydantic = "^2.9.2"
 requests = "^2.32.3"
+pytest = "^8.3.3"
+django-extensions = "^3.2.3"
+python-dotenv = "^1.1.0"
 
+[tool.poetry.dev-dependencies]
+django = "4.2.19"
+django-enum = "2.0.2"
+django-filter = "24.3"
+django-mysql = "4.15.0"
+djangorestframework = "3.15.2"
+djangorestframework-simplejwt = "5.3.1"
+exceptiongroup = "1.2.2"
+importlib_metadata = "8.6.1"
+iniconfig = "2.0.0"
+Markdown = "3.7"
+packaging = "24.2"
+pillow = "11.0.0"
+pluggy = "1.5.0"
+PyJWT = "2.10.1"
+pytest = "8.3.3"
+pytest-django = "4.9.0"
+rest-framework-simplejwt = "0.0.2"
+sqlparse = "0.5.2"
+tomli = "2.2.1"
+typing_extensions = "4.12.2"
+zipp = "3.21.0"
+pydantic = "^2.11.5"
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"

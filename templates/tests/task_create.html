@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load dict_filters %}
+
+{% block title %} Создать задание | Химия{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/tests.css">
+{% endblock %}
+
+{% block content %}
+<div class="create-tests-container">
+    <h1>Сгенерировать задание</h1>
+
+    <div id="notification" class="notification"></div>
+
+    <div class="task-title"><h3>Текст задания:</h3></div>
+    <div class="create-tests-content">
+        <div class="textfield-content">
+            <label class="textfield-label">
+                <textarea id="tasks-textfield" rows="30" cols="120">{{ form.task_text }}</textarea>
+            </label>
+        </div>
+
+        <div class="control-panel-content">
+            <label class="task-selector-label">
+                <select id="task-selector">
+                    <option value="task_1_p1"{% if form.selected_task == 'task_1_p1' %}selected{% endif %}>Задание 1 ч.1</option>
+                    <option value="task_2_p1"{% if form.selected_task == 'task_2_p1' %}selected{% endif %}>Задание 2 ч.1</option>
+                    <option value="task_3_p1"{% if form.selected_task == 'task_3_p1' %}selected{% endif %}>Задание 3 ч.1</option>
+                    <option value="task_4_p1"{% if form.selected_task == 'task_4_p1' %}selected{% endif %}>Задание 4 ч.1</option>
+                    <option value="task_5_p1"{% if form.selected_task == 'task_5_p1' %}selected{% endif %}>Задание 5 ч.1</option>
+                    <option value="task_6_p1"{% if form.selected_task == 'task_6_p1' %}selected{% endif %}>Задание 6 ч.1</option>
+                    <option value="task_7_p1"{% if form.selected_task == 'task_7_p1' %}selected{% endif %}>Задание 7 ч.1</option>
+                    <option value="task_8_p1"{% if form.selected_task == 'task_8_p1' %}selected{% endif %}>Задание 8 ч.1</option>
+                    <option value="task_9_p1"{% if form.selected_task == 'task_9_p1' %}selected{% endif %}>Задание 9 ч.1</option>
+                    <option value="task_10_p1"{% if form.selected_task == 'task_10_p1' %}selected{% endif %}>Задание 10 ч.1</option>
+                    <option value="task_11_p1"{% if form.selected_task == 'task_11_p1' %}selected{% endif %}>Задание 11 ч.1</option>
+                    <option value="task_12_p1"{% if form.selected_task == 'task_12_p1' %}selected{% endif %}>Задание 12 ч.1</option>
+                    <option value="task_13_p1"{% if form.selected_task == 'task_13_p1' %}selected{% endif %}>Задание 13 ч.1</option>
+                    <option value="task_14_p1"{% if form.selected_task == 'task_14_p1' %}selected{% endif %}>Задание 14 ч.1</option>
+                    <option value="task_15_p1"{% if form.selected_task == 'task_15_p1' %}selected{% endif %}>Задание 15 ч.1</option>
+                    <option value="task_16_p1"{% if form.selected_task == 'task_16_p1' %}selected{% endif %}>Задание 16 ч.1</option>
+                    <option value="task_17_p1"{% if form.selected_task == 'task_17_p1' %}selected{% endif %}>Задание 17 ч.1</option>
+                    <option value="task_18_p1"{% if form.selected_task == 'task_18_p1' %}selected{% endif %}>Задание 18 ч.1</option>
+                    <option value="task_19_p1"{% if form.selected_task == 'task_19_p1' %}selected{% endif %}>Задание 19 ч.1</option>
+                    <option value="task_20_p1"{% if form.selected_task == 'task_20_p1' %}selected{% endif %}>Задание 20 ч.1</option>
+                    <option value="task_1_p2"{% if form.selected_task == 'task_1_p2' %}selected{% endif %}>Задание 1 ч.2</option>
+                    <option value="task_2_p2"{% if form.selected_task == 'task_2_p2' %}selected{% endif %}>Задание 2 ч.2</option>
+                    <option value="task_3_p2"{% if form.selected_task == 'task_3_p2' %}selected{% endif %}>Задание 3 ч.2</option>
+                    <option value="task_4_p2"{% if form.selected_task == 'task_4_p2' %}selected{% endif %}>Задание 4 ч.2</option>
+                    <option value="task_5_p2"{% if form.selected_task == 'task_5_p2' %}selected{% endif %}>Задание 5 ч.2</option>
+                </select>
+            </label>
+
+            <div class="buttons-container">
+                <label class="clear-button-label">
+                    <button id="clear-button">Очистить</button>
+                </label>
+
+                <label class="task-generate-form-label">
+                    <form id="task-generate-form" action="create" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" id="selected-task" name="selected_task" value="">
+                        <button id="task-generate-button" type="submit">Сгенерировать</button>
+                    </form>
+                </label>
+
+                <label class="add-button-label">
+                    <form id="task-add-form" action="create" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" id="task-text" name="task_text" value="">
+                        <input type="hidden" id="task-answer" name="task_answer" value="">
+                        <input type="hidden" id="selected-task-answer" name="selected_task_answer" value="">
+                        <button id="add-button" type="submit">Добавить</button>
+                    </form>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="answer-title"><h3>Правильный ответ:</h3></div>
+    <div class="answer-task-content">
+        <div class="answer-textfield-content">
+            <label class="answer-textfield-label">
+                <textarea id="answer-tasks-textfield" rows="5" cols="120"></textarea>
+            </label>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    document.getElementById('clear-button').addEventListener('click', function() {
+        document.getElementById('tasks-textfield').value = ''; // Очистить текстовое поле
+    });
+
+    document.getElementById('task-generate-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Предотвращаем отправку формы по умолчанию
+
+        // Получаем выбранное значение из select
+        const selectedTask = document.getElementById('task-selector').value;
+        document.getElementById('selected-task').value = selectedTask;
+        this.submit();
+    });
+
+    document.getElementById('task-add-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const taskText = document.getElementById('tasks-textfield').value;
+        const taskAnswer = document.getElementById('answer-tasks-textfield').value;
+        const selectedTask = document.getElementById('task-selector').value;
+        document.getElementById('task-text').value = taskText;
+        document.getElementById('task-answer').value = taskAnswer;
+        document.getElementById('selected-task-answer').value = selectedTask;
+        this.submit();
+    });
+
+    {% if form.info_msg %}
+        document.addEventListener('DOMContentLoaded', function() {
+            showNotification("{{ form.info_msg|escapejs }}");
+        });
+    {% endif %}
+
+    function showNotification(message) {
+        const notification = document.getElementById('notification');
+        notification.textContent = message;
+        notification.style.display = 'block';
+
+        // Уведомление автоматически исчезнет через 3 секунды
+        setTimeout(() => {
+            notification.style.display = 'none';
+        }, 3000);
+    }
+
+</script>
+{% endblock %}
+</html>

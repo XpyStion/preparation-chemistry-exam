@@ -1,0 +1,506 @@
+/* Минималистичные формы аутентификации с анимациями */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-30px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* Добавляем стили, которые были в блоках style */
+/* Скрываем ненужные элементы на странице формы */
+header, footer {
+    display: none;
+}
+
+body {
+    background: linear-gradient(135deg, var(--bg-dark), var(--primary-dark));
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+/* Добавляем стили для активного поля */
+.active-field label {
+    color: #3498db;
+}
+
+.active-field input {
+    border-color: #3498db;
+    background-color: #fff;
+}
+
+.auth-container {
+    max-width: 450px;
+    width: 100%;
+    margin: 2rem;
+    animation: fadeIn 0.5s ease;
+}
+
+/* Форма */
+.auth-form {
+    background: var(--bg-light);
+    padding: 4rem 3rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    border: 1px solid rgba(123, 44, 191, 0.2);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Градиентная рамка */
+.auth-form::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    padding: 2px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+/* Заголовок */
+.auth-container h2 {
+    text-align: center;
+    font-size: 3.2rem;
+    margin-bottom: 4rem;
+    background: linear-gradient(135deg, var(--primary-light), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+}
+
+.auth-container h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    border-radius: var(--radius-full);
+}
+
+.auth-container h3 {
+    margin-bottom: 20px;
+    color: #34495e;
+    font-size: 20px;
+    text-align: center;
+    animation: slideIn 0.5s ease-out;
+}
+
+.auth-form .form-group {
+    margin-bottom: 25px;
+    animation: slideIn 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+.auth-form .form-group:nth-child(1) { animation-delay: 0.1s; }
+.auth-form .form-group:nth-child(2) { animation-delay: 0.2s; }
+.auth-form .form-group:nth-child(3) { animation-delay: 0.3s; }
+.auth-form .form-group:nth-child(4) { animation-delay: 0.4s; }
+.auth-form .form-group:nth-child(5) { animation-delay: 0.5s; }
+.auth-form .form-group:nth-child(6) { animation-delay: 0.6s; }
+
+.auth-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+    transition: color 0.3s;
+}
+
+.auth-form input,
+.auth-form select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s;
+    background-color: #f9f9f9;
+}
+
+.auth-form input:focus,
+.auth-form select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    background-color: #fff;
+}
+
+.auth-form input:focus + label,
+.auth-form select:focus + label {
+    color: #3498db;
+}
+
+.auth-form small {
+    display: block;
+    margin-top: 8px;
+    color: #7f8c8d;
+    font-size: 13px;
+    font-style: italic;
+}
+
+.form-actions {
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 28px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.6s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 1.6rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    border: none;
+    border-radius: var(--radius-full);
+    font-size: 1.6rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn-primary:hover::before {
+    opacity: 1;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(123, 44, 191, 0.3);
+}
+
+.btn-primary span {
+    position: relative;
+    z-index: 2;
+}
+
+/* Ссылки */
+.form-actions p {
+    margin-top: 2.5rem;
+    color: var(--text-light);
+    font-size: 1.5rem;
+}
+
+.form-actions a {
+    color: var(--primary-light);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.form-actions a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.form-actions a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Сообщения */
+.message-box {
+    padding: 15px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    animation: fadeIn 0.5s;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.message-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-left: 4px solid #28a745;
+}
+
+.message-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-left: 4px solid #dc3545;
+    animation: shake 0.5s;
+}
+
+/* Шаги регистрации */
+.registration-step {
+    display: none;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.registration-step.active-step {
+    display: block;
+}
+
+/* Стили для второго шага */
+#step-2 {
+    display: none;
+}
+
+#step-2.active-step {
+    display: block;
+}
+
+/* Выбор типа пользователя */
+.user-type-selection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.user-type-card {
+    background: rgba(123, 44, 191, 0.05);
+    padding: 2.5rem 2rem;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.user-type-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.user-type-card:hover::before {
+    opacity: 0.05;
+}
+
+.user-type-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+.user-type-card.selected {
+    border-color: var(--primary-color);
+    background: rgba(123, 44, 191, 0.1);
+}
+
+.user-type-icon {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(135deg, var(--primary-light), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.user-type-card h4 {
+    color: var(--text-color);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+.user-type-card p {
+    color: var(--text-light);
+    font-size: 1.4rem;
+    line-height: 1.5;
+    position: relative;
+    z-index: 2;
+}
+
+/* Адаптивность */
+@media (max-width: 576px) {
+    .auth-container {
+        margin: 1rem;
+    }
+
+    .auth-form {
+        padding: 3rem 2rem;
+    }
+
+    .auth-container h2 {
+        font-size: 2.8rem;
+    }
+
+    .user-type-selection {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group input {
+        font-size: 1.6rem;
+    }
+
+    .btn-primary {
+        padding: 1.4rem;
+    }
+}
+
+/* Стили для поля пароля с кнопкой просмотра */
+.password-field {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #95a5a6;
+    font-size: 18px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s;
+    z-index: 2;
+}
+
+.password-toggle:hover {
+    color: #3498db;
+}
+
+.password-toggle:focus {
+    outline: none;
+}
+
+/* Добавляем отступ справа для поля пароля, чтобы текст не перекрывался с иконкой */
+.password-field input[type="password"],
+.password-field input[type="text"] {
+    padding-right: 40px;
+}
+
+/* Анимация для иконки */
+@keyframes eyeBlink {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(0.1); }
+}
+
+.password-toggle:active i {
+    animation: eyeBlink 0.2s ease-in-out;
+}
+
+/* Стили для активного поля с паролем */
+.active-field.password-field label {
+    color: #3498db;
+}
+
+.active-field.password-field input {
+    border-color: #3498db;
+    background-color: #fff;
+}
+
+.password-field input, .username-field input{
+    border-color: #3498db;
+    color: #000000;
+    background-color: #fff;
+}
+
+/* Анимация для кнопки просмотра пароля */
+.password-toggle {
+    transition: transform 0.2s;
+}
+
+.password-toggle:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
+.password-toggle:active {
+    transform: translateY(-50%) scale(0.95);
+} 

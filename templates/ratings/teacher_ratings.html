@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ title }} | Химия{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/teacher_ratings.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="ratings-container">
+    <div class="ratings-header">
+        <h1>Рейтинг учителей</h1>
+        <p class="ratings-description">Список учителей, отсортированный по рейтингу</p>
+    </div>
+
+    <div class="teachers-list">
+        {% for teacher in teachers %}
+        <div class="teacher-card">
+            <div class="teacher-rank">{{ forloop.counter }}</div>
+            <div class="teacher-info">
+                <div class="teacher-avatar">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <div class="teacher-details">
+                    <h3 class="teacher-name">{{ teacher.get_full_name|default:teacher.username }}</h3>
+                    <p class="teacher-username">@{{ teacher.username }}</p>
+                </div>
+            </div>
+            <div class="teacher-stats">
+                <div class="stat-item likes">
+                    <i class="fas fa-thumbs-up"></i>
+                    <span>{{ teacher.likes_count }}</span>
+                </div>
+                <div class="stat-item dislikes">
+                    <i class="fas fa-thumbs-down"></i>
+                    <span>{{ teacher.dislikes_count }}</span>
+                </div>
+                <div class="stat-item activity">
+                    <i class="fas fa-chart-line"></i>
+                    <span>{{ teacher.activity_score }}</span>
+                </div>
+                <div class="stat-item rating">
+                    <i class="fas fa-star"></i>
+                    <span>{{ teacher.rating }}</span>
+                </div>
+            </div>
+            <div class="rating-progress">
+                {% with percentage=teacher.get_rating_percentage %}
+                <div class="progress">
+                    <div class="progress-bar" 
+                         role="progressbar" 
+                         style="width: {{ percentage }}%"
+                         aria-valuenow="{{ percentage }}" 
+                         aria-valuemin="0" 
+                         aria-valuemax="100">
+                        {{ percentage }}%
+                    </div>
+                </div>
+                {% endwith %}
+            </div>
+            <div class="teacher-actions">
+                {% if is_authenticated and user_info.user_type == 'student' %}
+                    {% if user_info.has_class %}
+                        <button class="join-class-btn" disabled>
+                            <i class="fas fa-users"></i>
+                            Вы уже в классе
+                        </button>
+                    {% else %}
+                        <button class="join-class-btn" 
+                                data-teacher-id="{{ teacher.id }}"
+                                onclick="sendJoinRequest(this)"
+                                {% if teacher.has_pending_request %}disabled{% endif %}>
+                            <i class="fas fa-user-plus"></i>
+                            {% if teacher.has_pending_request %}
+                                Заявка отправлена
+                            {% else %}
+                                Подать заявку
+                            {% endif %}
+                        </button>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <div class="no-teachers">
+            <i class="fas fa-user-slash"></i>
+            <p>Пока нет учителей в рейтинге</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Добавим модальное окно для сообщений -->
+<div id="messageModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="modalMessage"></p>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function sendJoinRequest(button) {
+    const teacherId = button.dataset.teacherId;
+    
+    console.log('Sending request for teacher:', teacherId);
+    
+    fetch(`/app/teachers/${teacherId}/join/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        }
+    })
+    .then(response => {
+        console.log('Response status:', response.status);
+        if (!response.ok) {
+            console.log('Response not OK');
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Response data:', data);
+        if (data.success) {
+            button.disabled = true;
+            button.innerHTML = '<i class="fas fa-check"></i> Заявка отправлена';
+            button.classList.add('request-sent');
+            showMessage('success', data.message);
+        } else {
+            showMessage('error', data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        console.error('Error details:', error.message);
+        showMessage('error', 'Произошла ошибка при отправке заявки');
+    });
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+function showMessage(type, text) {
+    const messagesContainer = document.querySelector('.messages') || createMessagesContainer();
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `alert alert-${type}`;
+    messageDiv.textContent = text;
+    messagesContainer.appendChild(messageDiv);
+    
+    setTimeout(() => {
+        messageDiv.style.opacity = '0';
+        setTimeout(() => messageDiv.remove(), 300);
+    }, 3000);
+}
+
+function createMessagesContainer() {
+    const container = document.createElement('div');
+    container.className = 'messages';
+    document.querySelector('.ratings-container').prepend(container);
+    return container;
+}
+
+// Закрытие модального окна
+const modal = document.getElementById('messageModal');
+const span = document.getElementsByClassName('close')[0];
+span.onclick = () => modal.style.display = 'none';
+window.onclick = (event) => {
+    if (event.target == modal) modal.style.display = 'none';
+}
+</script>
+{% endblock %} 

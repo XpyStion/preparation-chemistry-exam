@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load dict_filters %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/tests.css">
+{% endblock %}
+
+{% block content %}
+<div class="test-result-container">
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Контейнер для печати -->
+    <div class="print-container">
+        <div class="result-header">
+            <h1>{{ test.title }} - Результаты</h1>
+            <div class="score-summary">
+                <div class="score-box {% if attempt.status == 'awaiting_review' %}score-pending{% else %}score-final{% endif %}">
+                    <div class="score-label">Ваш результат:</div>
+                    <div class="score-value">
+                        {% if attempt.status == 'awaiting_review' %}
+                            <span class="pending-text">Ожидает проверки</span>
+                        {% else %}
+                            {{ total_score }} / {{ max_score }}
+                            <span class="score-percent">({{ percentage }}%)</span>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="status-box status-{{ attempt.status }}">
+                    <div class="status-label">Статус:</div>
+                    <div class="status-value">
+                        {% if attempt.status == 'completed' %}
+                            Завершен
+                        {% elif attempt.status == 'awaiting_review' %}
+                            Ожидает проверки учителем
+                        {% elif attempt.status == 'reviewed' %}
+                            Проверен
+                        {% elif attempt.status == 'timeout' %}
+                            Время истекло
+                        {% else %}
+                            {{ attempt.get_status_display }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="result-content">
+            <h2>Ваши ответы</h2>
+            
+            <div class="result-section">
+                <h3>Часть A: Вопросы с кратким ответом</h3>
+                {% if answers_part_a %}
+                    <div class="answers-list">
+                        {% for answer in answers_part_a %}
+                            <div class="answer-item {% if answer.is_correct %}correct{% else %}incorrect{% endif %}">
+                                <h4>Вопрос {{ forloop.counter }}</h4>
+                                <div class="question-text">{{ answer.question.text|safe }}</div>
+                                <div class="answer-details">
+                                    <p>Ваш ответ: {{ answer.answer_text }}</p>
+                                    <p>Правильный ответ: {{ answer.question.answer }}</p>
+                                    <p>Баллы: {{ answer.points_awarded }} / {{ answer.question.points }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="no-answers">Нет ответов на вопросы части A</p>
+                {% endif %}
+            </div>
+            
+            {% if is_authenticated and answers_part_b %}
+                <div class="result-section">
+                    <h3>Часть B: Вопросы с развернутым ответом</h3>
+                    <div class="answers-list">
+                        {% for answer in answers_part_b %}
+                            <div class="answer-item">
+                                <h4>Вопрос {{ forloop.counter }}</h4>
+                                <div class="question-text">{{ answer.question.text|safe }}</div>
+                                <div class="answer-details">
+                                    <p>Ваш ответ: {{ answer.answer_text|linebreaks }}</p>
+                                    <p>Баллы: {{ answer.points_awarded }} / {{ answer.question.points }}</p>
+                                    {% if answer.teacher_comment %}
+                                        <p>Комментарий учителя: {{ answer.teacher_comment }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="result-actions">
+        <a href="{% url 'test_list' %}" class="btn btn-primary">
+            <i class="fas fa-list"></i> Все тесты
+        </a>
+        {% if attempt.status == 'completed' or attempt.status == 'reviewed' %}
+            <a href="{% url 'test_start' test_id=test.id %}" class="btn btn-success">
+                <i class="fas fa-redo"></i> Пройти тест заново
+            </a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Обновленный JavaScript для печати -->
+<script src="{% static 'js/test_result.js' %}"></script>
+{% endblock %} 

@@ -1,15 +1,42 @@
-# Описание
-Сервис для подготовки к ЕГЭ по химии
+# Chemistry portal
 
+Этот документ содержит инструкции по настройке и запуску проекта на Django с использованием базы данных SQLite.
 
-# Быстрый старт
-1. pip install poetry
-2. 
+## Установка
 
+## 1. Создайте виртуальное окружение и активируйте его:
 
-# Работа с YandexGPT
-Для работы с YandexGPT необходим токен **IAM** и **CATALOG_ID**, которые передаются в 
-переменные окружения **IAM_TOKEN** и **CATALOG_ID**.
+bash
+### Windows
 
-Токен **IAM** получается на основе токена **OAuth**.
-**CATALOG_ID** берется с диалогового окна работы с **YandexGPT** в интерфейсе **UI**.
+python -m venv venv
+venv\Scripts\activate
+
+### Linux/macOS
+
+python3 -m venv venv
+source venv/bin/activate
+
+2. Установите poetry и зависимости:
+
+pip install poetry && poetry install
+
+3. Примените миграции:
+
+python back/manage.py migrate
+
+4. Запустите сервер разработки:
+
+python manage.py runserver
+
+5. В файле .env добавьте значения для **FOLDER_ID** и **OAUTH_TOKEN**
+
+6. Откройте браузер и перейдите по адресу:
+
+    http://127.0.0.1:8000/
+
+## Роли
+| Роль    | Логин   | Пароль         |
+|---------|---------|----------------|
+| Учитель | teach   | teachteach     |
+| Ученик  | student | studentstudent |

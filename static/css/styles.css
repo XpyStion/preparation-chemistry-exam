@@ -1,0 +1,1504 @@
+/* Здесь должны остаться только общие стили, 
+   стили для главной страницы перенесены в home.css */ 
+
+/* Современные общие стили для всего сайта */
+:root {
+  /* Основная цветовая палитра - тёмно-фиолетовая тема */
+  --primary-color: #7B2CBF;      /* Основной фиолетовый */
+  --primary-dark: #5A189A;       /* Тёмно-фиолетовый */
+  --primary-light: #9D4EDD;      /* Светло-фиолетовый */
+  --secondary-color: #C77DFF;    /* Дополнительный фиолетовый */
+  --secondary-dark: #B15EFF;     /* Тёмный дополнительный */
+  --secondary-light: #E0AAFF;    /* Светлый дополнительный */
+  --accent-color: #FF7DFF;       /* Акцентный розовый */
+  --accent-dark: #FF5EFF;        /* Тёмный акцентный */
+  --accent-light: #FFAAFF;       /* Светлый акцентный */
+  
+  /* Нейтральные цвета */
+  --text-color: #E2E2E2;         /* Светлый текст */
+  --text-light: #B8B8B8;         /* Приглушенный текст */
+  --text-lighter: #808080;       /* Самый светлый текст */
+  --text-bright: #f5f5f5;       /* Яркий текст */
+  --bg-color: #1A1625;           /* Тёмный фон */
+  --bg-light: #241B2F;           /* Светлее фон */
+  --bg-dark: #13111B;            /* Самый тёмный фон */
+
+  /* Тени */
+  --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 5px 20px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 15px 50px rgba(0, 0, 0, 0.7);
+
+  /* Скругления */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 30px;
+  --radius-full: 9999px;
+
+  /* Анимации */
+  --transition-fast: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition-slow: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  /* Шрифты */
+  --font-main: 'Inter', 'Roboto', 'Arial', sans-serif;
+  --font-heading: 'Poppins', 'Montserrat', 'Arial', sans-serif;
+  --font-mono: 'Fira Code', 'Consolas', monospace;
+
+  /* Размеры */
+  --header-height: 7rem;
+  --container-max-width: 1280px;
+  --container-padding: 2rem;
+
+  /* Z-индексы */
+  --z-negative: -1;
+  --z-normal: 1;
+  --z-tooltip: 10;
+  --z-fixed: 100;
+  --z-modal: 1000;
+}
+
+/* Подключение современных шрифтов */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+
+/* Сброс стилей и базовые настройки */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%; /* 10px = 1rem */
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-height);
+}
+
+body {
+  font-family: var(--font-main);
+  font-size: 1.6rem;
+  line-height: 1.7;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Основной контейнер */
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* Основной контент */
+main {
+  flex: 1;
+  padding: 4rem 0;
+}
+
+/* Современные стили для заголовков */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 2rem;
+  color: var(--text-color);
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 4.8rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: 3.8rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 3rem;
+}
+
+h4 {
+  font-size: 2.4rem;
+}
+
+h5 {
+  font-size: 2rem;
+}
+
+h6 {
+  font-size: 1.8rem;
+}
+
+/* Параграфы */
+p {
+  margin-bottom: 1.6rem;
+}
+
+/* Стили для ссылок */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: var(--transition);
+  position: relative;
+}
+
+a:hover {
+  color: var(--primary-dark);
+}
+
+a.underline-link {
+  position: relative;
+  display: inline-block;
+}
+
+a.underline-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--primary-color);
+  transition: var(--transition);
+}
+
+a.underline-link:hover::after {
+  width: 100%;
+}
+
+/* Улучшенные стили для кнопок */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem 2.8rem;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 1.6rem;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  gap: 1rem;
+  letter-spacing: 0.02em;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn i {
+  font-size: 1.8rem;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: var(--transition-slow);
+  z-index: -1;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+}
+
+.btn-primary:active {
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, var(--secondary-color), var(--secondary-dark));
+  color: white;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  background: linear-gradient(135deg, var(--secondary-dark), var(--secondary-color));
+}
+
+.btn-accent {
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
+  color: white;
+}
+
+.btn-accent:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent-color));
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-color);
+  border: 2px solid var(--primary-color);
+  padding: calc(1.2rem - 2px) calc(2.8rem - 2px);
+}
+
+.btn-outline:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-small {
+  padding: 0.8rem 1.8rem;
+  font-size: 1.4rem;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: white;
+  box-shadow: var(--shadow-xs);
+}
+
+.btn-small:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  color: white;
+}
+
+.btn-icon {
+  width: 4.2rem;
+  height: 4.2rem;
+  padding: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-icon i {
+  font-size: 2rem;
+}
+
+/* Группа кнопок */
+.btn-group {
+  display: flex;
+  gap: 1.5rem;
+}
+
+@media (max-width: 576px) {
+  .btn-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-group .btn {
+    width: 100%;
+  }
+}
+
+/* Стили для карточек */
+.card {
+  background-color: var(--bg-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 2rem;
+  transition: var(--transition);
+  border: 1px solid rgba(123, 44, 191, 0.2);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Адаптивные стили */
+@media (max-width: 1200px) {
+  html {
+    font-size: 60%;
+  }
+}
+
+@media (max-width: 992px) {
+  html {
+    font-size: 58%;
+  }
+
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 56%;
+  }
+
+  h1 {
+    font-size: 3.8rem;
+  }
+
+  h2 {
+    font-size: 3.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  html {
+    font-size: 54%;
+  }
+
+  h1 {
+    font-size: 3.4rem;
+  }
+
+  h2 {
+    font-size: 2.8rem;
+  }
+
+  .btn {
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+  }
+}
+
+/* Стили для навигации */
+header {
+  background-color: rgba(19, 17, 27, 0.95); /* Полупрозрачный темный фон */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(123, 44, 191, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-fixed);
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+header.scrolled {
+  height: calc(var(--header-height) - 1.5rem);
+  background-color: rgba(19, 17, 27, 0.98);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+  font-size: 2.4rem;
+  font-weight: 800;
+  font-family: var(--font-heading);
+  background: linear-gradient(135deg, var(--primary-light), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.logo::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.logo:hover::after {
+  opacity: 1;
+}
+
+.logo a {
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  gap: 1rem;
+}
+
+.nav-links li a {
+  font-weight: 500;
+  position: relative;
+  color: var(--text-light);
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-full);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.4rem;
+  white-space: nowrap;
+}
+
+/* Стили для пользовательского меню */
+.user-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-link {
+  padding: 0.6rem 1.2rem;
+}
+
+.logout-link {
+  padding: 0.6rem !important;
+  color: var(--text-light) !important;
+}
+
+.logout-link:hover {
+  color: var(--accent-color) !important;
+}
+
+.username {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Обновленные медиа-запросы */
+@media (max-width: 1200px) {
+  .nav-links li a {
+    padding: 0.5rem 1rem;
+    font-size: 1.3rem;
+  }
+
+  .nav-links {
+    gap: 0.5rem;
+  }
+
+  .username {
+    max-width: 100px;
+  }
+}
+
+@media (max-width: 992px) {
+  .nav-links {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    background: var(--bg-dark);
+    flex-direction: column;
+    padding: 2rem;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    gap: 1rem;
+    z-index: 1000;
+  }
+
+  .nav-links.active {
+    transform: translateX(0);
+  }
+
+  .nav-links li a {
+    width: 100%;
+    justify-content: center;
+    padding: 1rem;
+    font-size: 1.6rem;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .username {
+    max-width: none;
+  }
+}
+
+/* Стили для кнопки мобильного меню */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 2.4rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+/* Обновляем стили для логотипа */
+.logo {
+  font-size: 2.4rem;
+  padding: 0.5rem 0;
+}
+
+@media (max-width: 576px) {
+  .logo {
+    font-size: 2rem;
+  }
+
+  .nav-links li a {
+    font-size: 1.4rem;
+  }
+}
+
+/* Стили для анимаций */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.slide-in-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.slide-in-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scale-in {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.scale-in.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Анимация пульсации */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Анимация плавающего эффекта */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Стили для футера */
+footer {
+  background: linear-gradient(135deg, var(--bg-dark), var(--primary-dark));
+  color: white;
+  padding: 6rem 0 3rem;
+  margin-top: 8rem;
+  position: relative;
+  overflow: hidden;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 4rem;
+  margin-bottom: 4rem;
+}
+
+.footer-column h4 {
+  color: white;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.footer-column h4::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 5rem;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  border-radius: var(--radius-full);
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 1.2rem;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.8);
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.footer-links a:hover {
+  color: white;
+  transform: translateX(5px);
+}
+
+.footer-links a i {
+  font-size: 1.4rem;
+  color: var(--primary-light);
+}
+
+.footer-social {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: var(--transition);
+}
+
+.footer-social a:hover {
+  background-color: var(--primary-color);
+  transform: translateY(-5px);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  footer {
+    padding: 4rem 0 2rem;
+  }
+}
+
+/* Стили для меню пользователя */
+.user-menu {
+  position: relative;
+}
+
+.user-menu-trigger {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--radius-full);
+  transition: var(--transition);
+  background-color: var(--bg-dark);
+}
+
+.user-menu-trigger:hover {
+  background-color: rgba(67, 97, 238, 0.1);
+}
+
+.user-menu-trigger i {
+  font-size: 2rem;
+  color: var(--primary-color);
+}
+
+.user-menu-trigger span {
+  font-weight: 500;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + 1rem);
+  right: 0;
+  width: 24rem;
+  background-color: var(--bg-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 0;
+  z-index: var(--z-tooltip);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: var(--transition);
+  overflow: hidden;
+}
+
+.user-dropdown.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.user-dropdown-header {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+  color: white;
+  text-align: center;
+}
+
+.user-dropdown-header .user-avatar {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: var(--primary-color);
+}
+
+.user-dropdown-header .user-name {
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
+.user-dropdown-header .user-email {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.user-dropdown-links {
+  padding: 1rem 0;
+}
+
+.user-dropdown a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 1.5rem;
+  color: var(--text-color);
+  transition: var(--transition);
+}
+
+.user-dropdown a i {
+  font-size: 1.8rem;
+  color: var(--text-light);
+  transition: var(--transition);
+}
+
+.user-dropdown a:hover {
+  background-color: rgba(67, 97, 238, 0.08);
+  color: var(--primary-color);
+}
+
+.user-dropdown a:hover i {
+  color: var(--primary-color);
+}
+
+.user-dropdown a.logout-link {
+  border-top: 1px solid var(--bg-dark);
+  margin-top: 0.5rem;
+  color: var(--accent-color);
+}
+
+.user-dropdown a.logout-link i {
+  color: var(--accent-color);
+}
+
+.user-dropdown a.logout-link:hover {
+  background-color: rgba(247, 37, 133, 0.08);
+}
+
+@media (max-width: 576px) {
+  .user-menu-trigger span {
+    display: none;
+  }
+
+  .user-menu-trigger {
+    padding: 0.8rem;
+  }
+
+  .user-dropdown {
+    width: 28rem;
+    right: -5rem;
+  }
+
+  .user-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 7rem;
+    width: 16px;
+    height: 16px;
+    background-color: var(--bg-light);
+    transform: rotate(45deg);
+    box-shadow: var(--shadow-sm);
+    z-index: -1;
+  }
+}
+
+/* Эффект стеклянного морфизма для карточек */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+}
+
+/* Улучшенные стили для кнопок */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+  transform: translateX(-100%) rotate(30deg);
+  transition: transform 0.6s;
+}
+
+.btn:hover::after {
+  transform: translateX(100%) rotate(30deg);
+}
+
+/* Улучшенная адаптивность для мобильных устройств */
+@media (max-width: 480px) {
+  html {
+    font-size: 58%; /* Уменьшаем базовый размер шрифта для очень маленьких экранов */
+  }
+
+  h1 {
+    font-size: 3.6rem;
+  }
+
+  h2 {
+    font-size: 2.8rem;
+  }
+
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .btn {
+    padding: 1rem 2rem;
+    font-size: 1.4rem;
+  }
+}
+
+/* Улучшенная доступность для фокуса */
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Улучшенные анимации для интерактивных элементов */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Современные стили для форм */
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 1.2rem 1.6rem;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  color: var(--text-color);
+  background-color: var(--bg-light);
+  background-clip: padding-box;
+  border: 1px solid var(--text-lighter);
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.25);
+}
+
+.form-group {
+  margin-bottom: 2rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.8rem;
+  font-weight: 500;
+}
+
+/* Улучшенные стили для мобильной навигации */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 2.4rem;
+  color: var(--text-color);
+  transition: var(--transition);
+}
+
+.mobile-menu-btn:hover {
+  color: var(--primary-color);
+}
+
+@media (max-width: 992px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+  
+  .nav-links {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    background-color: var(--bg-light);
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 4rem;
+    transform: translateX(100%);
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+    z-index: var(--z-fixed);
+  }
+  
+  .nav-links.active {
+    transform: translateX(0);
+  }
+  
+  .nav-links li {
+    margin: 1.5rem 0;
+  }
+  
+  .nav-links li a {
+    font-size: 1.8rem;
+  }
+}
+
+/* Стили для изображений в статьях */
+.article-detail-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.article-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+/* Ограничение размера изображения на странице детальной статьи */
+.article-detail-container .article-image img {
+    max-width: 600px;
+    max-height: 400px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Общие стили для изображений */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Стили для карточек новостей и статей */
+.news-card .news-image img,
+.article-card .article-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+/* Стили для детальных страниц */
+.article-detail-image,
+.news-detail-image {
+    max-width: 600px;
+    max-height: 400px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    margin: 0 auto 20px;
+    display: block;
+}
+
+.class-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.class-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-settings {
+    padding: 5px 10px;
+    background: none;
+    border: none;
+    color: #777;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-settings:hover {
+    color: var(--primary-color);
+    transform: rotate(90deg);
+}
+
+#editClassNameModal .modal-content {
+    max-width: 400px;
+    padding: 20px;
+}
+
+#editClassNameModal .form-group {
+    margin-bottom: 20px;
+}
+
+#editClassNameModal input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#editClassNameModal h2 {
+    color: #333;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transform: scale(0.7);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.modal.active .modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+#editClassNameModal h2 {
+    color: #333;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+#editClassNameModal .form-group {
+    margin-bottom: 20px;
+}
+
+#editClassNameModal input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1.4rem;
+    transition: border-color 0.3s ease;
+}
+
+#editClassNameModal input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 25px;
+}
+
+.modal-buttons button {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-buttons .btn-primary {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+}
+
+.modal-buttons .btn-secondary {
+    background: #f8f9fa;
+    color: #666;
+    border: 1px solid #ddd;
+}
+
+.modal-buttons button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Стили для правой части хедера */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.profile-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 1.6rem;
+    color: var(--text-light);
+    text-decoration: none;
+    border-radius: var(--radius-full);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(123, 44, 191, 0.2);
+    background: rgba(123, 44, 191, 0.05);
+}
+
+.profile-link:hover {
+    background: rgba(123, 44, 191, 0.15);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.profile-link.active {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    border: none;
+}
+
+.profile-link i {
+    font-size: 1.8rem;
+    transition: transform 0.3s ease;
+}
+
+.profile-link:hover i {
+    transform: rotate(15deg);
+}
+
+/* Добавляем стили для выделенного текста */
+::selection {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Обновляем стили для форм */
+input, textarea, select {
+  background-color: var(--bg-light);
+  border: 1px solid rgba(123, 44, 191, 0.3);
+  color: var(--text-color);
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(123, 44, 191, 0.2);
+}
+
+/* Обновляем базовые размеры для мобильных устройств */
+@media (max-width: 992px) {
+  :root {
+    --header-height: 6rem;
+  }
+
+  /* Уменьшаем размер контейнера */
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  /* Обновляем стили навигации */
+  nav {
+    padding: 0 1rem;
+  }
+
+  .logo {
+    font-size: 2.2rem;
+    padding: 0.3rem 0;
+  }
+
+  /* Обновляем мобильное меню */
+  .mobile-menu-btn {
+    width: 4rem;
+    height: 4rem;
+    padding: 0.5rem;
+    font-size: 2rem;
+  }
+
+  /* Обновляем выпадающее меню */
+  .nav-links {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    background: rgba(19, 17, 27, 0.98);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    flex-direction: column;
+    padding: 2rem;
+    gap: 1rem;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .nav-links.active {
+    transform: translateX(0);
+  }
+
+  .nav-links li {
+    width: 100%;
+    margin: 0;
+  }
+
+  .nav-links li a {
+    width: 100%;
+    padding: 1.2rem;
+    justify-content: center;
+    font-size: 1.6rem;
+  }
+
+  /* Обновляем правую часть хедера */
+  .header-right {
+    gap: 1rem;
+  }
+
+  .profile-link {
+    padding: 0.6rem 1rem;
+    font-size: 1.4rem;
+  }
+
+  .profile-link i {
+    font-size: 1.6rem;
+  }
+
+  /* Скрываем текст на маленьких экранах, оставляем только иконки */
+  .profile-link span {
+    display: none;
+  }
+}
+
+/* Дополнительные стили для очень маленьких экранов */
+@media (max-width: 576px) {
+  :root {
+    --header-height: 5.5rem;
+  }
+
+  .logo {
+    font-size: 2rem;
+  }
+
+  nav {
+    padding: 0 0.8rem;
+  }
+
+  .mobile-menu-btn {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  /* Компактное расположение элементов */
+  .header-right {
+    gap: 0.8rem;
+  }
+
+  .profile-link {
+    padding: 0.5rem;
+    min-width: 3.5rem;
+    height: 3.5rem;
+    justify-content: center;
+  }
+
+  /* Оптимизация выпадающего меню */
+  .nav-links {
+    padding: 1.5rem;
+  }
+
+  .nav-links li a {
+    padding: 1rem;
+    font-size: 1.4rem;
+  }
+
+  /* Улучшаем читаемость на маленьких экранах */
+  .nav-links li a i {
+    font-size: 1.8rem;
+    margin-right: 1rem;
+  }
+}
+
+/* Стили для устройств с очень маленьким экраном */
+@media (max-width: 360px) {
+  :root {
+    --header-height: 5rem;
+  }
+
+  .logo {
+    font-size: 1.8rem;
+  }
+
+  .mobile-menu-btn,
+  .profile-link {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+
+  /* Минимизируем отступы */
+  nav {
+    padding: 0 0.5rem;
+  }
+
+  .header-right {
+    gap: 0.5rem;
+  }
+}
+
+/* Добавляем поддержку ландшафтной ориентации */
+@media (max-height: 500px) and (orientation: landscape) {
+  .nav-links {
+    padding: 1rem;
+    overflow-y: auto;
+  }
+
+  .nav-links li a {
+    padding: 0.8rem;
+  }
+} 

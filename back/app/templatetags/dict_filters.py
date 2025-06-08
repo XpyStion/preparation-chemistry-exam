@@ -1,0 +1,16 @@
+from django import template
+
+register = template.Library()
+
+@register.filter
+def get(dictionary, key):
+    """
+    Возвращает значение из словаря по ключу
+    """
+    if dictionary is None or key is None:
+        return None
+    return dictionary.get(key)
+
+@register.filter
+def subtract(value, arg):
+    return value - arg 
